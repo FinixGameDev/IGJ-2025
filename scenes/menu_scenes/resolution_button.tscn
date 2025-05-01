@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcjahviw00kyc"]
+
+[ext_resource type="Script" uid="uid://bv8iylk2c84t4" path="res://scripts/ui/resolution_button.gd" id="1_gpfcf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m5wf8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_n8fuq"]
+font_size = 32
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_c377b"]
+color = Color(0.347817, 0.347817, 0.347817, 1)
+thickness = 5
+vertical = true
+
+[node name="ResolutionButton" type="HBoxContainer"]
+theme_override_constants/separation = 30
+alignment = 1
+script = ExtResource("1_gpfcf")
+
+[node name="VSeparator2" type="VSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_m5wf8")
+
+[node name="Name" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Resolution"
+label_settings = SubResource("LabelSettings_n8fuq")
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 200
+theme_override_styles/separator = SubResource("StyleBoxLine_c377b")
+
+[node name="Button" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2

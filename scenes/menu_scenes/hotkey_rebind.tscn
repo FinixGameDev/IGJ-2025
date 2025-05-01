@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://b37yb3bi8gkh7"]
+
+[ext_resource type="Script" uid="uid://debvonedlwct8" path="res://scripts/ui/hotkey_rebind.gd" id="1_bf1hr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m5wf8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_n8fuq"]
+font_size = 32
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_c377b"]
+color = Color(0.347817, 0.347817, 0.347817, 1)
+thickness = 5
+vertical = true
+
+[node name="HotkeyRebind" type="HBoxContainer" groups=["hotkey_buttons"]]
+theme_override_constants/separation = 30
+alignment = 1
+script = ExtResource("1_bf1hr")
+action_name = "Unassigned"
+
+[node name="VSeparator2" type="VSeparator" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_m5wf8")
+
+[node name="Name" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Action Name"
+label_settings = SubResource("LabelSettings_n8fuq")
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 50
+theme_override_styles/separator = SubResource("StyleBoxLine_c377b")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+toggle_mode = true
+text = "action_value"
+
+[node name="Button2" type="Button" parent="."]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+toggle_mode = true
+text = "action_value_2"
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]
+[connection signal="toggled" from="Button2" to="." method="_on_button_2_toggled"]

@@ -1,0 +1,130 @@
+[gd_scene load_steps=10 format=3 uid="uid://cedf8dexfe75p"]
+
+[ext_resource type="Theme" uid="uid://12luaxvvh3tt" path="res://resources/theme_main.tres" id="1_7i2ea"]
+[ext_resource type="Script" uid="uid://n3rmwtdtremj" path="res://scripts/systems/main_menu.gd" id="1_kov03"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ny5bo"]
+size = Vector2(3, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xp8y"]
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb3hh"]
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40ta1"]
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axby4"]
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="FontFile" id="FontFile_jelxa"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_py80f"]
+font = SubResource("FontFile_jelxa")
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("version_text", "continue_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7i2ea")
+script = ExtResource("1_kov03")
+version_text = NodePath("MarginContainer/HBoxContainer/RSide/VersionLabel")
+continue_button = NodePath("MarginContainer/HBoxContainer/LSide/GameOptions/ContinueButton")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 200
+
+[node name="LSide" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LSide"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_ny5bo")
+expand_mode = 5
+
+[node name="GameOptions" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LSide"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 33
+alignment = 1
+
+[node name="NewGameButton" type="Button" parent="MarginContainer/HBoxContainer/LSide/GameOptions"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_right = NodePath("../../../RSide/SettingsButton")
+focus_neighbor_bottom = NodePath("../ContinueButton")
+focus_next = NodePath("../ContinueButton")
+focus_previous = NodePath("../QuitButton")
+text = "PLay"
+
+[node name="ContinueButton" type="Button" parent="MarginContainer/HBoxContainer/LSide/GameOptions"]
+visible = false
+layout_mode = 2
+focus_neighbor_top = NodePath("../NewGameButton")
+focus_neighbor_right = NodePath("../../../RSide/SettingsButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../NewGameButton")
+disabled = true
+text = "Continue
+"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/LSide/GameOptions"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../ContinueButton")
+focus_neighbor_right = NodePath("../../../RSide/SettingsButton")
+focus_neighbor_bottom = NodePath("../NewGameButton")
+focus_next = NodePath("../NewGameButton")
+focus_previous = NodePath("../ContinueButton")
+text = "Quit
+"
+
+[node name="RSide" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="SettingsButton" type="TextureButton" parent="MarginContainer/HBoxContainer/RSide"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+focus_neighbor_left = NodePath("../../LSide/GameOptions/NewGameButton")
+texture_normal = SubResource("AtlasTexture_3xp8y")
+texture_pressed = SubResource("AtlasTexture_eb3hh")
+texture_hover = SubResource("AtlasTexture_40ta1")
+texture_focused = SubResource("AtlasTexture_axby4")
+stretch_mode = 4
+
+[node name="VersionLabel" type="Label" parent="MarginContainer/HBoxContainer/RSide"]
+layout_mode = 2
+text = "Game Version"
+label_settings = SubResource("LabelSettings_py80f")
+
+[node name="Logo" type="TextureRect" parent="MarginContainer/HBoxContainer/RSide"]
+visible = false
+layout_mode = 2
+expand_mode = 4
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/LSide/GameOptions/NewGameButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/LSide/GameOptions/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/RSide/SettingsButton" to="." method="_on_settings_pressed"]
