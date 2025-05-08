@@ -1,12 +1,25 @@
-extends MarginContainer
+extends Control
 
+@onready var prompt_icon = $Prompt/TextureRect
+@onready var prompt_label = $Prompt/Label
 
 func _ready() -> void:
-	if OS.has_feature("android") or OS.has_feature("ios"):
-		$VBoxContainer/MobileControls.visible = true
-	else:
-		$VBoxContainer/MobileControls.visible = false
+	_check_prompt()
 
-func _on_pause_button_pressed() -> void:
-	AppGlobal.set_pause_subtree(AppGlobal.game_controller.world_2d, true)
-	AppGlobal.game_controller.change_gui_scene("res://scenes/menu_scenes/pause_menu.tscn", false, true, false)
+func _physics_process(delta: float) -> void:
+	_check_prompt()
+
+func _check_prompt():
+	var interact = InputMap.action_get_events("game_interact")
+	var action : InputEventJoypadButton 
+	
+	for i in interact:
+		if i is InputEventJoypadButton:
+			action = i
+	
+	if InputChecker.is_mouse:
+		prompt_icon.texture = null
+		prompt_label.text = "[E] Interact"
+	else:
+		prompt_icon.texture = AppGlobal.get_prompt_icon(action)
+		prompt_label.text = "Interact"

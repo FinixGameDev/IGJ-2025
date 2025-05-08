@@ -27,7 +27,7 @@ func load_keybinds() -> void:
 func set_action_name():
 	label.text = "Unassigned"
 	
-	var converted_text = action_name.lstrip("game_")
+	var converted_text = action_name.trim_prefix("game_")
 	
 	for i in range(converted_text.length()):
 		if converted_text[i] == '_':
@@ -41,7 +41,7 @@ func set_text_for_key():
 	for i in action_events:
 		if i is InputEventKey:
 			primary_button.text = OS.get_keycode_string(i.physical_keycode)
-		elif i is InputEventJoypadButton:
+		elif i is InputEventJoypadButton or i is InputEventJoypadMotion:
 			var icon = AppGlobal.get_prompt_icon(i)
 			if icon == null:
 				secondary_button.text = i.as_text()

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://db31j17b5dxta"]
+
+[ext_resource type="Script" uid="uid://b5bsxyjyc2juo" path="res://scripts/player_controller.gd" id="1_d4y06"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e6s5b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4y06"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6agyq"]
+material = SubResource("StandardMaterial3D_d4y06")
+
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER")]
+script = ExtResource("1_d4y06")
+CAMERA_CONTROLLER = NodePath("Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_e6s5b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_6agyq")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6028, 0)
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="Camera3D"]

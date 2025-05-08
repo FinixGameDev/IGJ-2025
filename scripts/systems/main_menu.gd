@@ -9,14 +9,15 @@ func _ready():
 	
 	$MarginContainer/HBoxContainer/LSide/GameOptions/NewGameButton.grab_focus()
 	
-	version_text.text = AppGlobal.game_version
+	#version_text.text = AppGlobal.game_version
 	
 	if OS.has_feature("android") or OS.has_feature("ios"):
 		$MarginContainer/HBoxContainer/LSide/GameOptions/QuitButton.visible = false
 
 
 func _on_play_button_pressed():
-	AppGlobal.game_controller.change_gui_scene("res://scenes/menu_scenes/level_select_menu.tscn", true)
+	AppGlobal.game_controller.change_gui_scene("res://scenes/menu_scenes/hud.tscn", true)
+	AppGlobal.game_controller.change_3d_scene("res://scenes/sample_level.tscn", true)
 
 func _on_load_game_button_play():
 	AppGlobal.game_controller.change_gui_scene("res://scenes/menu_scenes/save_manager_menu.tscn", false, false, false)

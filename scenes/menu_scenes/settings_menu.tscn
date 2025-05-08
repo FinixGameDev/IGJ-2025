@@ -1,13 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyk1u435svh1y"]
+[gd_scene load_steps=9 format=3 uid="uid://dyk1u435svh1y"]
 
 [ext_resource type="Theme" uid="uid://12luaxvvh3tt" path="res://resources/theme_main.tres" id="1_vskev"]
 [ext_resource type="Script" uid="uid://b8wd01jrdlo7x" path="res://scripts/ui/settings_menu.gd" id="2_uajn7"]
-[ext_resource type="Script" uid="uid://che3fb1mdvdjl" path="res://scenes/menu_scenes/control_settings_tab.gd" id="5_24f8v"]
+[ext_resource type="Script" uid="uid://che3fb1mdvdjl" path="res://scripts/ui/control_settings_tab.gd" id="5_24f8v"]
 [ext_resource type="PackedScene" uid="uid://ducsm4nm3hlfi" path="res://scenes/menu_scenes/audio_slider.tscn" id="5_akk34"]
 [ext_resource type="PackedScene" uid="uid://cjl1osjac4ngl" path="res://scenes/menu_scenes/window_button.tscn" id="5_bxrt6"]
 [ext_resource type="PackedScene" uid="uid://dcjahviw00kyc" path="res://scenes/menu_scenes/resolution_button.tscn" id="6_l4cqt"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_24f8v"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rkjk2"]
 
@@ -26,14 +24,6 @@ script = ExtResource("2_uajn7")
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
-
-[node name="Button" type="TextureButton" parent="HBoxContainer"]
-custom_minimum_size = Vector2(96, 96)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-texture_normal = SubResource("PlaceholderTexture2D_24f8v")
-stretch_mode = 4
 
 [node name="PanelContainer" type="Panel" parent="HBoxContainer"]
 layout_mode = 2
@@ -161,5 +151,12 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_rkjk2")
 layout_mode = 2
 theme_override_constants/separation = 32
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jk8t8")
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Back"
 
 [connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_exit_pressed"]

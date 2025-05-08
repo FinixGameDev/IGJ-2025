@@ -5,8 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://cxpx64eru8jgo" path="res://scenes/menu_scenes/debug.tscn" id="2_pd3lb"]
 [ext_resource type="PackedScene" uid="uid://cnm5fvlj4v4ut" path="res://scenes/menu_scenes/transition_controller.tscn" id="3_3atpd"]
 
-[node name="GameController" type="Node" node_paths=PackedStringArray("world_2d", "gui", "transition_controller")]
+[node name="GameController" type="Node" node_paths=PackedStringArray("world_3d", "world_2d", "gui", "transition_controller")]
 script = ExtResource("1_0w5t2")
+world_3d = NodePath("World3D")
 world_2d = NodePath("World2D")
 gui = NodePath("GUI")
 transition_controller = NodePath("GUI/TransitionController")

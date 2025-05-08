@@ -39,16 +39,11 @@ theme_override_styles/separator = SubResource("StyleBoxLine_c377b")
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(190, 0)
 layout_mode = 2
-toggle_mode = true
 text = "action_value"
 
 [node name="Button2" type="Button" parent="."]
 custom_minimum_size = Vector2(190, 0)
 layout_mode = 2
-toggle_mode = true
 text = "action_value_2"
 icon_alignment = 1
 expand_icon = true
-
-[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]
-[connection signal="toggled" from="Button2" to="." method="_on_button_2_toggled"]

@@ -4,6 +4,8 @@ var game_controller : GameController
 var debug : DebugMenu
 var saves : Array
 
+var in_game = false
+
 var game_version : String
 @onready var game_prompts : ButtonIconsResource = preload("res://resources/prompts/xbox_prompts.tres")
 @onready var buttons = game_prompts.create_buttons_dict()

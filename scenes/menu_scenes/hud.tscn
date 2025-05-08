@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://crjwwtfpxbteg"]
+
+[ext_resource type="Script" uid="uid://crsmcm7sktvho" path="res://scripts/ui/hud.gd" id="1_ts6us"]
+[ext_resource type="Script" uid="uid://pneulx2rnewy" path="res://scripts/ui/reticle.gd" id="1_wq2w1"]
+[ext_resource type="Texture2D" uid="uid://cnd0yn64v5omy" path="res://resources/sprites/xelu_s_controller_prompts/Xbox Series/XboxSeriesX_A.png" id="2_makuk"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_ts6us")
+
+[node name="Prompt" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 603.0
+offset_top = 312.0
+offset_right = 691.0
+offset_bottom = 335.0
+
+[node name="TextureRect" type="TextureRect" parent="Prompt"]
+layout_mode = 2
+texture = ExtResource("2_makuk")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Prompt"]
+layout_mode = 2
+text = "Interact"
+
+[node name="Reticle" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wq2w1")
+
+[node name="Line2D" type="Line2D" parent="Reticle"]
+points = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0, 0, -10)
+width = 2.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true

@@ -3,7 +3,7 @@ extends MarginContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$HBoxContainer/Button.grab_focus()
+	$HBoxContainer/PanelContainer/MarginContainer/TabContainer/Sound.grab_focus()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
