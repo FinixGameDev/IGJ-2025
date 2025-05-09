@@ -10,9 +10,10 @@ albedo_color = Color(1, 0, 0, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6agyq"]
 material = SubResource("StandardMaterial3D_d4y06")
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER")]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "RAY_CAST")]
 script = ExtResource("1_d4y06")
 CAMERA_CONTROLLER = NodePath("Camera3D")
+RAY_CAST = NodePath("Camera3D/RayCast3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -26,3 +27,6 @@ mesh = SubResource("CapsuleMesh_6agyq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6028, 0)
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="Camera3D"]
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -5)

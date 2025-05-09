@@ -8,6 +8,7 @@ const TILT_UPPER_LIMIT := deg_to_rad(90.0)
 const TILT_LOWER_LIMIT := deg_to_rad(-90.0)
 
 @export var CAMERA_CONTROLLER : Node3D
+@export var RAY_CAST : RayCast3D
 
 var _mouse_input = false
 var _mouse_rotation  : Vector3
@@ -15,6 +16,7 @@ var _player_rotation : Vector3
 var _camera_rotation : Vector3
 var _rotation_input : float
 var _tilt_input : float
+var _interactable_object : InteractableObject
 
 var inverted_controls = false
 
@@ -24,6 +26,10 @@ func  _ready() -> void:
 
 func _process(delta: float) -> void:
 	update_camera(delta)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("game_interact"):
+		_interact()
 
 func _unhandled_input(event: InputEvent) -> void:
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
@@ -75,3 +81,18 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	_interactable_check()
+
+func _interactable_check():
+	var object = RAY_CAST.get_collider()
+	
+	if object != null && object is InteractableObject:
+		_interactable_object = object
+	else:
+		_interactable_object = null
+
+func _interact():
+	if _interactable_object != null:
+		Dialogic.start(_interactable_object.dialog)
+		process_mode = Node.PROCESS_MODE_DISABLED
+		Dialogic.timeline_ended.connect(func(): process_mode = Node.PROCESS_MODE_INHERIT)

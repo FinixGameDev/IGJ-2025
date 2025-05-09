@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bor8akg52ypr1"]
+[gd_scene load_steps=10 format=3 uid="uid://bor8akg52ypr1"]
 
 [ext_resource type="PackedScene" uid="uid://db31j17b5dxta" path="res://scenes/player_controller.tscn" id="1_y6k4c"]
+[ext_resource type="Script" uid="uid://uk75mm63wasi" path="res://scripts/interactable_object.gd" id="2_b2sq2"]
+[ext_resource type="Resource" uid="uid://bnncaflego4qn" path="res://resources/dialogic/sample_timeline.dtl" id="3_w1bg1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y6k4c"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -14,6 +16,13 @@ background_mode = 2
 sky = SubResource("Sky_b2sq2")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w1bg1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fdjnj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ru6pt"]
+albedo_color = Color(0, 1, 1, 1)
 
 [node name="SampleLevel" type="Node3D"]
 
@@ -35,3 +44,15 @@ size = Vector3(15, 0.1, 15)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441212, -0.334592)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11726, 0.99013, 0)
+script = ExtResource("2_b2sq2")
+dialog = ExtResource("3_w1bg1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("CapsuleShape3D_w1bg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("CapsuleMesh_fdjnj")
+surface_material_override/0 = SubResource("StandardMaterial3D_ru6pt")
