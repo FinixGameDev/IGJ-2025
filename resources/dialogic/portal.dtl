@@ -1,0 +1,4 @@
+Go through the portal?
+- Yes
+	[signal arg="filter"]
+- No

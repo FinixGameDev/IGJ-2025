@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://db31j17b5dxta"]
+[gd_scene load_steps=8 format=3 uid="uid://db31j17b5dxta"]
 
 [ext_resource type="Script" uid="uid://b5bsxyjyc2juo" path="res://scripts/player_controller.gd" id="1_d4y06"]
+[ext_resource type="Shader" uid="uid://b630fivj7cb7q" path="res://scripts/shaders/outline.gdshader" id="2_6agyq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e6s5b"]
 
@@ -9,6 +10,19 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6agyq"]
 material = SubResource("StandardMaterial3D_d4y06")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8xumb"]
+render_priority = 0
+shader = ExtResource("2_6agyq")
+shader_parameter/sensitivity = 0.0
+shader_parameter/outline_thickness = 0.0
+shader_parameter/step_threshold = 0.0
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_jh7gh"]
+material = SubResource("ShaderMaterial_8xumb")
+flip_faces = true
+size = Vector2(2, 2)
 
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "RAY_CAST")]
 script = ExtResource("1_d4y06")
@@ -27,6 +41,11 @@ mesh = SubResource("CapsuleMesh_6agyq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6028, 0)
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="Camera3D"]
+size = Vector3(50, 50, 50)
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
+extra_cull_margin = 20.0
+mesh = SubResource("QuadMesh_jh7gh")

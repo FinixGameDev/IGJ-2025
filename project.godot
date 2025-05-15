@@ -28,9 +28,16 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 directories/dch_directory={}
 directories/dtl_directory={
-"sample_timeline": "res://resources/dialogic/sample_timeline.dtl"
+"keycode": "res://resources/dialogic/keycode.dtl",
+"portal": "res://resources/dialogic/portal.dtl",
+"sample_timeline": "res://resources/dialogic/sample_timeline.dtl",
+"timeline-1": "res://resources/dialogic/timeline-1.dtl",
+"timeline-2": "res://resources/dialogic/timeline-2.dtl"
 }
-variables={}
+variables={
+"inverted": false,
+"password": ""
+}
 extensions_folder="res://addons/dialogic_additions"
 text/letter_speed=0.01
 text/initial_text_reveal_skippable=true
@@ -53,6 +60,7 @@ save/encryption_on_exports_only=true
 text/autopauses={}
 layout/style_list=["res://resources/dialogic/style.tres"]
 layout/default_style="res://resources/dialogic/style.tres"
+glossary/default_case_sensitive=true
 
 [editor_plugins]
 

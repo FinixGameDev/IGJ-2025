@@ -2,9 +2,11 @@ extends Control
 
 @onready var prompt_icon = $Prompt/TextureRect
 @onready var prompt_label = $Prompt/Label
+@onready var color_filter = $Filters/InvertColor
 
 func _ready() -> void:
 	_check_prompt()
+	Dialogic.signal_event.connect(_on_dialogic_signal)
 
 func _physics_process(delta: float) -> void:
 	_check_prompt()
@@ -23,3 +25,7 @@ func _check_prompt():
 	else:
 		prompt_icon.texture = AppGlobal.get_prompt_icon(action)
 		prompt_label.text = "Interact"
+
+func _on_dialogic_signal(argument: String) -> void:
+	if argument.contains("filter"):
+		color_filter.visible = !color_filter.visible

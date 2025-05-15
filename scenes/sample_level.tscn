@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bor8akg52ypr1"]
+[gd_scene load_steps=17 format=3 uid="uid://bor8akg52ypr1"]
 
 [ext_resource type="PackedScene" uid="uid://db31j17b5dxta" path="res://scenes/player_controller.tscn" id="1_y6k4c"]
 [ext_resource type="Script" uid="uid://uk75mm63wasi" path="res://scripts/interactable_object.gd" id="2_b2sq2"]
 [ext_resource type="Resource" uid="uid://bnncaflego4qn" path="res://resources/dialogic/sample_timeline.dtl" id="3_w1bg1"]
+[ext_resource type="Resource" uid="uid://blx1djsdh5c0b" path="res://resources/dialogic/keycode.dtl" id="4_fdjnj"]
+[ext_resource type="Shader" uid="uid://dyh1kch7inmeb" path="res://scripts/shaders/highlight.gdshader" id="5_ru6pt"]
+[ext_resource type="PackedScene" uid="uid://knw56fmqfu22" path="res://scenes/portal.tscn" id="6_151wm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y6k4c"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -24,6 +27,22 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ru6pt"]
 albedo_color = Color(0, 1, 1, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ru6pt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_151wm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_151wm"]
+render_priority = 0
+shader = ExtResource("5_ru6pt")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/cycle_interval = 1.0
+shader_parameter/shine_speed = 3.0
+shader_parameter/shine_width = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lq53s"]
+next_pass = SubResource("ShaderMaterial_151wm")
+albedo_color = Color(0.380392, 0, 1, 1)
+
 [node name="SampleLevel" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -34,19 +53,45 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="PlayerController" parent="." instance=ExtResource("1_y6k4c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.54607)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3779, 0, 9.32464)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
-size = Vector3(15, 0.1, 15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.57003, -1.5)
+flip_faces = true
+size = Vector3(35, 7.32268, 30)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441212, -0.334592)
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -3.57003, 0.399781)
+operation = 2
+flip_faces = true
+size = Vector3(0.515381, 20, 31.8623)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.63051, -3.57003, 0.399781)
+operation = 2
+flip_faces = true
+size = Vector3(0.515381, 20, 47.5688)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.08702, -7.42038)
+flip_faces = true
+size = Vector3(1, 3.19348, 2.63965)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.08702, 8.8461)
+flip_faces = true
+size = Vector3(1, 3.19348, 2.63965)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.3522, -2.08702, 0.568521)
+flip_faces = true
+size = Vector3(1, 3.19348, 2.63965)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11726, 0.99013, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.00582, 0.99013, 1.96206)
 script = ExtResource("2_b2sq2")
 dialog = ExtResource("3_w1bg1")
 
@@ -56,3 +101,21 @@ shape = SubResource("CapsuleShape3D_w1bg1")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("CapsuleMesh_fdjnj")
 surface_material_override/0 = SubResource("StandardMaterial3D_ru6pt")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.35655, 0, 3.09243)
+script = ExtResource("2_b2sq2")
+dialog = ExtResource("4_fdjnj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.79112, 1.78404, 2.10675)
+shape = SubResource("BoxShape3D_ru6pt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2/CollisionShape3D"]
+mesh = SubResource("BoxMesh_151wm")
+surface_material_override/0 = SubResource("StandardMaterial3D_lq53s")
+
+[node name="Portal" parent="." instance=ExtResource("6_151wm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6894, 1.02512, 1.71171)
+
+[editable path="PlayerController"]

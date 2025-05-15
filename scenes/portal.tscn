@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://knw56fmqfu22"]
+
+[ext_resource type="Script" uid="uid://uk75mm63wasi" path="res://scripts/interactable_object.gd" id="1_v0xau"]
+[ext_resource type="Resource" uid="uid://yn0svhtxjger" path="res://resources/dialogic/portal.dtl" id="2_1ffj6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppl40"]
+transparency = 1
+albedo_color = Color(1, 0, 1, 0.568627)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ppl40"]
+material = SubResource("StandardMaterial3D_ppl40")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ppl40"]
+size = Vector3(1.74121, 2.22363, 0.265625)
+
+[node name="Portal" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.74067, 0, 0, 0, 2.23285, 0, 0, 0, 0.29189, 0, 0, 0)
+mesh = SubResource("SphereMesh_ppl40")
+
+[node name="Static body" type="StaticBody3D" parent="."]
+script = ExtResource("1_v0xau")
+dialog = ExtResource("2_1ffj6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Static body"]
+shape = SubResource("BoxShape3D_ppl40")

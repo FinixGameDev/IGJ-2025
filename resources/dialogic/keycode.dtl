@@ -1,0 +1,6 @@
+[text_input text="Please enter the password:" var="password" placeholder="0000"]
+if {password} == "1234":
+	Opening door...
+	[signal arg="open_door_1"]
+else:
+	Wrong password!
